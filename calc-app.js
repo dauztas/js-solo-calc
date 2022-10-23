@@ -57,7 +57,7 @@ function init() {
 
   // Function to color the output border on error or not.
   function colorOutput(v) {
-    output.style.border = v + " 3px solid";
+    output.style.border = v + " 2px solid";
   }
 
   function evalOutput() {
