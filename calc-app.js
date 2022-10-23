@@ -22,6 +22,8 @@ const specials = ["/", "*", "+", "-"];
 function init() {
   document.title = "Javascript Calculator";
   console.log("ready");
+  let decimal = false;
+  let evaluation = false;
   const container = document.createElement("div");
   container.classList.add("container");
   container.style.maxWidth = "600px";
@@ -74,8 +76,21 @@ function init() {
   }
 
   function addOutput(e) {
+    console.log(decimal);
     output.style.border = "black 1px solid";
     let character = e.target.val;
+
+    if (character == ".") {
+      if (decimal) {
+        character = "";
+        output.style.border = "red 1px solid";
+      } else {
+        decimal = true;
+      }
+    }
+    if (evaluation) {
+      decimal = false;
+    }
     output.value += character;
   }
 }
