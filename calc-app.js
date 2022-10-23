@@ -40,7 +40,6 @@ function init() {
   main.style.width = "100%";
   container.appendChild(main);
   options.forEach(function (val) {
-    //console.log(val);
     buttonMaker(val, addOutput);
   });
 
@@ -48,10 +47,17 @@ function init() {
   buttonMaker("c", clrOutput);
 
   function evalOutput() {
-    console.log("=");
+    output.style.border = "black 1px solid";
+
     if (output.value === "") {
       output.style.border = "red 1px solid";
+    } else {
+      output.value = eval(output.value);
     }
+  }
+
+  function clrOutput() {
+    output.value = "";
   }
 
   function buttonMaker(txt, myFunction) {
@@ -68,7 +74,6 @@ function init() {
   }
 
   function addOutput(e) {
-    console.log(e.target.val);
     output.style.border = "black 1px solid";
     let character = e.target.val;
     output.value += character;
