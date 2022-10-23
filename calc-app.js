@@ -48,13 +48,19 @@ function init() {
   buttonMaker("=", evalOutput);
   buttonMaker("c", clrOutput);
 
+  function colorOutput(v) {
+    output.style.border = v + " 3px solid";
+  }
+
   function evalOutput() {
-    output.style.border = "black 1px solid";
+    colorOutput("black");
 
     if (output.value === "") {
-      output.style.border = "red 1px solid";
+      colorOutput("red");
+    } else if (evaluation) {
+      colorOutput("red");
     } else {
-      output.value = eval(output.value);
+      output.value = evaluation(output.value);
     }
   }
 
@@ -77,19 +83,20 @@ function init() {
 
   function addOutput(e) {
     console.log(decimal);
-    output.style.border = "black 1px solid";
+    colorOutput("black");
     let character = e.target.val;
 
     if (character == ".") {
       if (decimal) {
         character = "";
-        output.style.border = "red 1px solid";
+        colorOutput("red");
       } else {
         decimal = true;
       }
     }
+    evaluation = specials.includes(character);
     if (evaluation) {
-      decimal = false;
+      decimals = false;
     }
     output.value += character;
   }
